@@ -45,9 +45,21 @@
   .btn-line{border:1px solid var(--walnut-deep); color:var(--walnut-deep); margin-left:12px;}
   .btn-line:hover{background:var(--walnut-deep); color:var(--cream);}
 
-  .wheel-card{background:var(--straw); border:1px solid var(--line); padding:28px;}
-  .wheel{aspect-ratio:1/1; border-radius:50%; overflow:hidden; border:10px solid var(--rind); box-shadow:0 0 0 3px var(--cream);}
+  .wheel-card{background:var(--straw); border:1px solid var(--line); padding:28px; perspective:1000px;}
+  .wheel{aspect-ratio:1/1; border-radius:50%; overflow:hidden; border:10px solid var(--rind); box-shadow:0 0 0 3px var(--cream); will-change:transform;}
   .wheel img{width:100%; height:100%; object-fit:cover; display:block;}
+
+  /* Reveal suave ao rolar (sem blur) */
+  .reveal{
+    opacity:0; transform:translateY(26px);
+    transition:opacity .7s ease, transform .7s ease;
+  }
+  .reveal.in-view{ opacity:1; transform:translateY(0); }
+
+  @media (prefers-reduced-motion: reduce){
+    .wheel{ transform:none !important; }
+    .reveal{ opacity:1 !important; transform:none !important; transition:none; }
+  }
   .wheel-meta{margin-top:20px; display:grid; grid-template-columns:1fr 1fr; gap:14px 18px; font-family:'Courier New',monospace; font-size:12.5px; border-top:1px solid var(--line); padding-top:16px;}
   .wheel-meta div span{display:block; color:var(--ink-soft); font-size:10.5px; letter-spacing:1px; text-transform:uppercase; margin-bottom:4px;}
   .wheel-meta div strong{font-family:Georgia,serif; font-size:15px; font-weight:400;}
@@ -145,7 +157,7 @@
       <a href="#contato" class="btn btn-line">Agendar visita</a>
     </div>
     <div class="wheel-card">
-      <div class="wheel">
+      <div class="wheel" id="cheeseWheel">
         <img src="https://images.pexels.com/photos/34535760/pexels-photo-34535760.jpeg?auto=compress&cs=tinysrgb&w=700" alt="Vendedor em queijaria artesanal com queijos expostos">
       </div>
       <div class="wheel-meta">
@@ -159,31 +171,31 @@
 </header>
 
 <section id="queijos" class="wrap">
-  <div class="section-head">
+  <div class="section-head reveal">
     <div class="eyebrow">Caderno de cura</div>
     <h2>Cada roda, <em>um registro</em></h2>
     <p>Anotamos data de salga e virada de cada lote — o preço reflete o tempo que cada queijo pediu pra ficar pronto.</p>
   </div>
   <div class="ledger">
-    <div class="ledger-row">
+    <div class="ledger-row reveal">
       <div class="seal-thumb"><img src="https://images.pexels.com/photos/33575864/pexels-photo-33575864.jpeg?auto=compress&cs=tinysrgb&w=150" alt="Gouda da cava"></div>
       <div class="ledger-name">Gouda da Cava<small>Casca lavada, sabor amanteigado</small></div>
       <div class="ledger-age mono">4 meses</div>
       <div class="ledger-price mono">R$ 62 / 400g</div>
     </div>
-    <div class="ledger-row">
+    <div class="ledger-row reveal" style="transition-delay:.05s">
       <div class="seal-thumb"><img src="https://images.pexels.com/photos/13079969/pexels-photo-13079969.jpeg?auto=compress&cs=tinysrgb&w=150" alt="Tábua do produtor"></div>
       <div class="ledger-name">Tábua do Produtor<small>Seleção de três queijos da casa</small></div>
       <div class="ledger-age mono">Variado</div>
       <div class="ledger-price mono">R$ 89 / tábua</div>
     </div>
-    <div class="ledger-row">
+    <div class="ledger-row reveal" style="transition-delay:.1s">
       <div class="seal-thumb"><img src="https://images.pexels.com/photos/9946772/pexels-photo-9946772.jpeg?auto=compress&cs=tinysrgb&w=150" alt="Reserva do vale"></div>
       <div class="ledger-name">Reserva do Vale<small>Textura firme, sabor intenso</small></div>
       <div class="ledger-age mono">12 meses</div>
       <div class="ledger-price mono">R$ 78 / 300g</div>
     </div>
-    <div class="ledger-row">
+    <div class="ledger-row reveal" style="transition-delay:.15s">
       <div class="seal-thumb"><img src="https://images.pexels.com/photos/4193752/pexels-photo-4193752.jpeg?auto=compress&cs=tinysrgb&w=150" alt="Queijo fresco"></div>
       <div class="ledger-name">Queijo Fresco<small>Sem maturação, leve e cremoso</small></div>
       <div class="ledger-age mono">Sem cura</div>
@@ -194,21 +206,21 @@
 
 <div class="process-band">
   <div class="wrap" style="display:block;">
-    <div class="process-head">
+    <div class="process-head reveal">
       <div class="eyebrow">Do leite à roda pronta</div>
       <h2>Quatro etapas, <em style="color:var(--rind);">nenhum atalho</em></h2>
     </div>
   </div>
   <div class="wrap">
-    <div class="p-step"><div class="num">01</div><h3>Coalhada</h3><p>Leite cru coalhado ainda morno, cortado à mão em cubos regulares.</p></div>
-    <div class="p-step"><div class="num">02</div><h3>Prensagem</h3><p>Moldes de madeira e prensa manual, virados de hora em hora.</p></div>
-    <div class="p-step"><div class="num">03</div><h3>Salga</h3><p>Banho de salmoura por até 48h, conforme o tamanho da roda.</p></div>
-    <div class="p-step"><div class="num">04</div><h3>Cura na cava</h3><p>Viradas e escovadas à mão todos os dias até o ponto de venda.</p></div>
+    <div class="p-step reveal"><div class="num">01</div><h3>Coalhada</h3><p>Leite cru coalhado ainda morno, cortado à mão em cubos regulares.</p></div>
+    <div class="p-step reveal" style="transition-delay:.06s"><div class="num">02</div><h3>Prensagem</h3><p>Moldes de madeira e prensa manual, virados de hora em hora.</p></div>
+    <div class="p-step reveal" style="transition-delay:.12s"><div class="num">03</div><h3>Salga</h3><p>Banho de salmoura por até 48h, conforme o tamanho da roda.</p></div>
+    <div class="p-step reveal" style="transition-delay:.18s"><div class="num">04</div><h3>Cura na cava</h3><p>Viradas e escovadas à mão todos os dias até o ponto de venda.</p></div>
   </div>
 </div>
 
 <section id="sobre" class="wrap">
-  <div class="section-head">
+  <div class="section-head reveal">
     <div class="eyebrow">Nossa história</div>
     <h2>Três gerações <em>na mesma fazenda</em></h2>
   </div>
@@ -262,6 +274,36 @@
   navLinks.querySelectorAll('a').forEach(link => {
     link.addEventListener('click', () => navLinks.classList.remove('open'));
   });
+
+  const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+  if (!reduceMotion) {
+    // Roda de queijo gira conforme a rolagem, como se estivesse sendo virada na cava
+    const cheeseWheel = document.getElementById('cheeseWheel');
+    function onScroll() {
+      if (cheeseWheel) {
+        cheeseWheel.style.transform = `rotateY(${window.scrollY * 0.3}deg)`;
+      }
+    }
+    window.addEventListener('scroll', onScroll, { passive: true });
+    onScroll();
+  }
+
+  // Elementos aparecem suavemente ao entrar na tela
+  const revealTargets = document.querySelectorAll('.reveal');
+  if (reduceMotion || !('IntersectionObserver' in window)) {
+    revealTargets.forEach(el => el.classList.add('in-view'));
+  } else {
+    const revealObserver = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('in-view');
+          revealObserver.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.15 });
+    revealTargets.forEach(el => revealObserver.observe(el));
+  }
 </script>
 
 </body>
