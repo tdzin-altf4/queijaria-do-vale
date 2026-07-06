@@ -5,6 +5,39 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Queijaria do Vale — Queijos Artesanais</title>
 <meta name="description" content="Queijaria do Vale — queijos artesanais maturados em cava de pedra, direto da fazenda para sua mesa.">
+<link rel="canonical" href="https://tdzin-altf4.github.io/queijaria-do-vale/">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' fill='%23FBF6E9'/%3E%3Ccircle cx='16' cy='16' r='12' fill='none' stroke='%23B9812E' stroke-width='4'/%3E%3Ccircle cx='16' cy='16' r='5' fill='%238C611F'/%3E%3C/svg%3E">
+
+<meta property="og:title" content="Queijaria do Vale — Queijos Artesanais">
+<meta property="og:description" content="Queijos artesanais maturados em cava de pedra, direto da fazenda para sua mesa.">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://tdzin-altf4.github.io/queijaria-do-vale/">
+<meta property="og:image" content="https://images.pexels.com/photos/34535760/pexels-photo-34535760.jpeg?auto=compress&cs=tinysrgb&w=700">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Queijaria do Vale — Queijos Artesanais">
+<meta name="twitter:description" content="Queijos artesanais maturados em cava de pedra, direto da fazenda para sua mesa.">
+<meta name="twitter:image" content="https://images.pexels.com/photos/34535760/pexels-photo-34535760.jpeg?auto=compress&cs=tinysrgb&w=700">
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "LocalBusiness",
+  "name": "Queijaria do Vale",
+  "description": "Queijaria artesanal de leite cru com maturação em cava de pedra.",
+  "address": {
+    "@type": "PostalAddress",
+    "streetAddress": "Estrada do Vale, km 12 — Zona Rural"
+  },
+  "telephone": "+5535998881234",
+  "email": "contato@queijariadovale.com.br",
+  "openingHoursSpecification": {
+    "@type": "OpeningHoursSpecification",
+    "dayOfWeek": ["Thursday", "Friday", "Saturday", "Sunday"],
+    "opens": "09:00",
+    "closes": "17:00"
+  }
+}
+</script>
 <style>
   :root{
     --straw:#F2E7C9;
@@ -20,6 +53,10 @@
   html{scroll-behavior:smooth;}
   body{background:var(--cream); color:var(--walnut-deep); font-family:Georgia,'Iowan Old Style',serif; line-height:1.6;}
   a{color:inherit; text-decoration:none;}
+  a:focus-visible, button:focus-visible{outline:2px solid var(--rind); outline-offset:3px; border-radius:2px;}
+
+  .skip-link{position:absolute; left:-999px; top:auto; background:var(--walnut-deep); color:var(--cream); padding:12px 20px; z-index:100; font-size:13px;}
+  .skip-link:focus{left:16px; top:16px;}
   .wrap{max-width:1080px; margin:0 auto; padding:0 36px;}
   .mono{font-family:'Courier New', monospace;}
 
@@ -57,8 +94,11 @@
   .reveal.in-view{ opacity:1; transform:translateY(0); }
 
   @media (prefers-reduced-motion: reduce){
+    html{scroll-behavior:auto;}
     .wheel{ transform:none !important; }
     .reveal{ opacity:1 !important; transform:none !important; transition:none; }
+    .seal-thumb img, .strip-panel img{transition:none !important;}
+    .ledger-row:hover .seal-thumb img, .strip-panel:hover img{transform:none;}
   }
   .wheel-meta{margin-top:20px; display:grid; grid-template-columns:1fr 1fr; gap:14px 18px; font-family:'Courier New',monospace; font-size:12.5px; border-top:1px solid var(--line); padding-top:16px;}
   .wheel-meta div span{display:block; color:var(--ink-soft); font-size:10.5px; letter-spacing:1px; text-transform:uppercase; margin-bottom:4px;}
@@ -78,7 +118,8 @@
     padding:20px 0; border-bottom:1px solid var(--line);
   }
   .ledger-row .seal-thumb{width:54px; height:54px; border-radius:50%; overflow:hidden; border:2px solid var(--rind);}
-  .ledger-row .seal-thumb img{width:100%; height:100%; object-fit:cover; display:block;}
+  .ledger-row .seal-thumb img{width:100%; height:100%; object-fit:cover; display:block; transition:transform .4s ease;}
+  .ledger-row:hover .seal-thumb img{transform:scale(1.03);}
   .ledger-name{font-size:19px;}
   .ledger-name small{display:block; font-family:'Courier New',monospace; font-size:12px; color:var(--ink-soft); margin-top:4px; font-style:normal;}
   .ledger-age{font-family:'Courier New',monospace; font-size:12px; text-transform:uppercase; color:var(--rind-deep); justify-self:start;}
@@ -98,7 +139,8 @@
   /* ABOUT — photo strip */
   .strip{display:grid; grid-template-columns:repeat(5,1fr); gap:1px; background:var(--line); height:200px; margin-bottom:56px;}
   .strip-panel{overflow:hidden;}
-  .strip-panel img{width:100%; height:100%; object-fit:cover; display:block;}
+  .strip-panel img{width:100%; height:100%; object-fit:cover; display:block; transition:transform .4s ease;}
+  .strip-panel:hover img{transform:scale(1.03);}
   .about-text{max-width:640px;}
   .about-text p{color:var(--ink-soft); margin-bottom:16px; font-size:15.5px;}
   .stats{display:flex; gap:40px; margin-top:28px; flex-wrap:wrap;}
@@ -130,9 +172,17 @@
     .strip-panel:nth-child(4),.strip-panel:nth-child(5){display:none;}
     .contact-grid{grid-template-columns:1fr;}
   }
+
+  @media(max-width:380px){
+    .wrap{padding:0 20px;}
+    h1{font-size:26px;}
+    h2{font-size:26px;}
+  }
 </style>
 </head>
 <body>
+
+<a href="#conteudo" class="skip-link">Pular para o conteúdo</a>
 
 <nav>
   <div class="nav-row wrap" style="padding-left:0; padding-right:0;">
@@ -143,11 +193,11 @@
       <a href="#sobre">Sobre</a>
       <a href="#contato">Visitar</a>
     </div>
-    <button class="menu-toggle" id="menuToggle" aria-label="Menu">☰</button>
+    <button class="menu-toggle" id="menuToggle" aria-label="Menu" aria-expanded="false" aria-controls="navLinks">☰</button>
   </div>
 </nav>
 
-<header class="hero wrap">
+<header class="hero wrap" id="conteudo">
   <div class="hero-grid">
     <div>
       <div class="eyebrow">Queijaria de leite cru, cava de pedra</div>
@@ -158,7 +208,7 @@
     </div>
     <div class="wheel-card">
       <div class="wheel" id="cheeseWheel">
-        <img src="https://images.pexels.com/photos/34535760/pexels-photo-34535760.jpeg?auto=compress&cs=tinysrgb&w=700" alt="Vendedor em queijaria artesanal com queijos expostos">
+        <img src="https://images.pexels.com/photos/34535760/pexels-photo-34535760.jpeg?auto=compress&cs=tinysrgb&w=700" alt="Vendedor em queijaria artesanal com queijos expostos" width="700" height="700" fetchpriority="high">
       </div>
       <div class="wheel-meta">
         <div><span>Origem</span><strong>Fazenda do Vale, MG</strong></div>
@@ -178,25 +228,25 @@
   </div>
   <div class="ledger">
     <div class="ledger-row reveal">
-      <div class="seal-thumb"><img src="https://images.pexels.com/photos/33575864/pexels-photo-33575864.jpeg?auto=compress&cs=tinysrgb&w=150" alt="Gouda da cava"></div>
+      <div class="seal-thumb"><img src="https://images.pexels.com/photos/33575864/pexels-photo-33575864.jpeg?auto=compress&cs=tinysrgb&w=150" alt="Gouda da cava" width="150" height="150" loading="lazy"></div>
       <div class="ledger-name">Gouda da Cava<small>Casca lavada, sabor amanteigado</small></div>
       <div class="ledger-age mono">4 meses</div>
       <div class="ledger-price mono">R$ 62 / 400g</div>
     </div>
     <div class="ledger-row reveal" style="transition-delay:.05s">
-      <div class="seal-thumb"><img src="https://images.pexels.com/photos/13079969/pexels-photo-13079969.jpeg?auto=compress&cs=tinysrgb&w=150" alt="Tábua do produtor"></div>
+      <div class="seal-thumb"><img src="https://images.pexels.com/photos/13079969/pexels-photo-13079969.jpeg?auto=compress&cs=tinysrgb&w=150" alt="Tábua do produtor" width="150" height="150" loading="lazy"></div>
       <div class="ledger-name">Tábua do Produtor<small>Seleção de três queijos da casa</small></div>
       <div class="ledger-age mono">Variado</div>
       <div class="ledger-price mono">R$ 89 / tábua</div>
     </div>
     <div class="ledger-row reveal" style="transition-delay:.1s">
-      <div class="seal-thumb"><img src="https://images.pexels.com/photos/9946772/pexels-photo-9946772.jpeg?auto=compress&cs=tinysrgb&w=150" alt="Reserva do vale"></div>
+      <div class="seal-thumb"><img src="https://images.pexels.com/photos/9946772/pexels-photo-9946772.jpeg?auto=compress&cs=tinysrgb&w=150" alt="Reserva do vale" width="150" height="150" loading="lazy"></div>
       <div class="ledger-name">Reserva do Vale<small>Textura firme, sabor intenso</small></div>
       <div class="ledger-age mono">12 meses</div>
       <div class="ledger-price mono">R$ 78 / 300g</div>
     </div>
     <div class="ledger-row reveal" style="transition-delay:.15s">
-      <div class="seal-thumb"><img src="https://images.pexels.com/photos/4193752/pexels-photo-4193752.jpeg?auto=compress&cs=tinysrgb&w=150" alt="Queijo fresco"></div>
+      <div class="seal-thumb"><img src="https://images.pexels.com/photos/4193752/pexels-photo-4193752.jpeg?auto=compress&cs=tinysrgb&w=150" alt="Queijo fresco" width="150" height="150" loading="lazy"></div>
       <div class="ledger-name">Queijo Fresco<small>Sem maturação, leve e cremoso</small></div>
       <div class="ledger-age mono">Sem cura</div>
       <div class="ledger-price mono">R$ 34 / 400g</div>
@@ -225,11 +275,11 @@
     <h2>Três gerações <em>na mesma fazenda</em></h2>
   </div>
   <div class="strip">
-    <div class="strip-panel"><img src="https://images.pexels.com/photos/33470482/pexels-photo-33470482.jpeg?auto=compress&cs=tinysrgb&w=400" alt="Banca com variedade de queijos"></div>
-    <div class="strip-panel"><img src="https://images.pexels.com/photos/8738015/pexels-photo-8738015.jpeg?auto=compress&cs=tinysrgb&w=400" alt="Tábua de queijos artesanais"></div>
-    <div class="strip-panel"><img src="https://images.pexels.com/photos/18032214/pexels-photo-18032214.jpeg?auto=compress&cs=tinysrgb&w=400" alt="Detalhe de queijo curado"></div>
-    <div class="strip-panel"><img src="https://images.pexels.com/photos/15401463/pexels-photo-15401463.jpeg?auto=compress&cs=tinysrgb&w=400" alt="Degustação de queijos artesanais"></div>
-    <div class="strip-panel"><img src="https://images.pexels.com/photos/9946772/pexels-photo-9946772.jpeg?auto=compress&cs=tinysrgb&w=400" alt="Queijos em prateleira de madeira"></div>
+    <div class="strip-panel"><img src="https://images.pexels.com/photos/33470482/pexels-photo-33470482.jpeg?auto=compress&cs=tinysrgb&w=400" alt="Banca com variedade de queijos" width="400" height="200" loading="lazy"></div>
+    <div class="strip-panel"><img src="https://images.pexels.com/photos/8738015/pexels-photo-8738015.jpeg?auto=compress&cs=tinysrgb&w=400" alt="Tábua de queijos artesanais" width="400" height="200" loading="lazy"></div>
+    <div class="strip-panel"><img src="https://images.pexels.com/photos/18032214/pexels-photo-18032214.jpeg?auto=compress&cs=tinysrgb&w=400" alt="Detalhe de queijo curado" width="400" height="200" loading="lazy"></div>
+    <div class="strip-panel"><img src="https://images.pexels.com/photos/15401463/pexels-photo-15401463.jpeg?auto=compress&cs=tinysrgb&w=400" alt="Degustação de queijos artesanais" width="400" height="200" loading="lazy"></div>
+    <div class="strip-panel"><img src="https://images.pexels.com/photos/9946772/pexels-photo-9946772.jpeg?auto=compress&cs=tinysrgb&w=400" alt="Queijos em prateleira de madeira" width="400" height="200" loading="lazy"></div>
   </div>
   <div class="about-text">
     <p>A Queijaria do Vale começou com o rebanho do meu avô e uma cava escavada na rocha. Hoje mantemos o mesmo leite, a mesma paciência — só trocamos as lamparinas por termômetros.</p>
@@ -249,13 +299,13 @@
         <div class="eyebrow">Visite a queijaria</div>
         <h2>Aberto de <em>quinta a domingo</em></h2>
       </div>
-      <a href="#" class="btn btn-solid">Agendar degustação</a>
+      <a href="https://wa.me/5535998881234" class="btn btn-solid" target="_blank" rel="noopener">Agendar degustação</a>
     </div>
     <div>
       <div class="info-row"><span>Endereço</span>Estrada do Vale, km 12 — Zona Rural</div>
       <div class="info-row"><span>Horário</span>Quinta a domingo, 9h às 17h</div>
-      <div class="info-row"><span>Telefone</span>(35) 99888-1234</div>
-      <div class="info-row"><span>E-mail</span>contato@queijariadovale.com.br</div>
+      <div class="info-row"><span>Telefone</span><a href="tel:+5535998881234">(35) 99888-1234</a></div>
+      <div class="info-row"><span>E-mail</span><a href="mailto:contato@queijariadovale.com.br">contato@queijariadovale.com.br</a></div>
     </div>
   </div>
 </section>
@@ -270,9 +320,15 @@
 <script>
   const menuToggle = document.getElementById('menuToggle');
   const navLinks = document.getElementById('navLinks');
-  menuToggle.addEventListener('click', () => navLinks.classList.toggle('open'));
+  menuToggle.addEventListener('click', () => {
+    const isOpen = navLinks.classList.toggle('open');
+    menuToggle.setAttribute('aria-expanded', String(isOpen));
+  });
   navLinks.querySelectorAll('a').forEach(link => {
-    link.addEventListener('click', () => navLinks.classList.remove('open'));
+    link.addEventListener('click', () => {
+      navLinks.classList.remove('open');
+      menuToggle.setAttribute('aria-expanded', 'false');
+    });
   });
 
   const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
